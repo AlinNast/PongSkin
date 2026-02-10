@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bxsjqwurlq4a8"]
+[gd_scene load_steps=20 format=3 uid="uid://bxsjqwurlq4a8"]
 
 [ext_resource type="Material" uid="uid://c3b0ilgfnsvyi" path="res://shared/materials/Mat_Black.tres" id="1_y0gck"]
 [ext_resource type="Script" uid="uid://vspf4tlaj8t6" path="res://W0041E/Laboratory1/Lab3_GameFeel_Pong/Scripts/PongLogic.cs" id="2_0f0sq"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b6y4i2f21gati" path="res://W0041E/BuildingModels/GLB format/building-sample-tower-c.glb" id="8_bohxn"]
 [ext_resource type="PackedScene" uid="uid://b7g5mt3s4kbpt" path="res://W0041E/BuildingModels/GLB format/building-sample-tower-d.glb" id="9_i23wu"]
 [ext_resource type="PackedScene" uid="uid://b5tjf1lkpm3be" path="res://W0041E/CharacterModels/GLB format/character-male-c.glb" id="11_bohxn"]
+[ext_resource type="Script" uid="uid://ruv1gixd517i" path="res://W0041E/Laboratory1/Lab3_GameFeel_Pong/Scripts/Siren.cs" id="11_i23wu"]
 [ext_resource type="PackedScene" uid="uid://cxy57utbdkw0j" path="res://Char.tscn" id="13_bohxn"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5lwcm"]
@@ -26,6 +27,9 @@ ambient_light_color = Color(0.60148513, 0.1464198, 0.08106033, 1)
 ambient_light_energy = 0.42
 tonemap_exposure = 0.89
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.4241
+volumetric_fog_length = 196.61
 adjustment_enabled = true
 adjustment_brightness = 0.77
 adjustment_saturation = 0.65
@@ -42,9 +46,10 @@ material_override = ExtResource("1_y0gck")
 mesh = SubResource("QuadMesh_5lwcm")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
-transform = Transform3D(0.25623688, -0.96439457, 0.06547245, 0.12647249, 0.1006008, 0.9868557, -0.95830435, -0.2445885, 0.14774697, -0.0830178, 0.998127, -1.38534)
-light_color = Color(0.9999786, 0.6663374, 0.63565916, 1)
+transform = Transform3D(0.25623688, -0.9643941, 0.065472454, 0.41249788, 0.1703533, 0.8948884, -0.8741786, -0.20229623, 0.44146132, 0.8973086, 1.2715575, -0.362175)
+light_color = Color(0.66511315, 0.4966687, 0.41745466, 1)
 light_energy = 4.862
+light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 
 [node name="Centerline" type="Node3D" parent="Level"]
@@ -225,6 +230,57 @@ transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 
 
 [node name="building-sample-tower-d13" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
 transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.8471512, 0, 1.0432785)
+
+[node name="Siren" type="Node3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8230726, 0.19863927, 0.656141)
+script = ExtResource("11_i23wu")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Level/Siren"]
+light_color = Color(0.9124394, 0, 0.111834295, 1)
+light_volumetric_fog_energy = 50.0
+spot_range = 1.626
+spot_angle = 18.12
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Level/Siren"]
+transform = Transform3D(-0.9940905, 0, -0.10855451, 0, 1, 0, 0.10855451, 0, -0.9940905, 0, 0, 0)
+light_color = Color(0.3825918, 0.40537146, 0.94951814, 1)
+light_volumetric_fog_energy = 50.0
+spot_range = 1.626
+spot_angle = 18.12
+
+[node name="Siren2" type="Node3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0255666, -0.1584208, -0.778893)
+script = ExtResource("11_i23wu")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Level/Siren2"]
+light_color = Color(0.9124394, 0, 0.111834295, 1)
+light_volumetric_fog_energy = 50.0
+spot_range = 1.626
+spot_angle = 18.12
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Level/Siren2"]
+transform = Transform3D(-0.9940905, 0, -0.10855451, 0, 1, 0, 0.10855451, 0, -0.9940905, 0, 0, 0)
+light_color = Color(0.3825918, 0.40537146, 0.94951814, 1)
+light_volumetric_fog_energy = 50.0
+spot_range = 1.626
+spot_angle = 18.12
+
+[node name="Siren3" type="Node3D" parent="Level"]
+transform = Transform3D(-0.99999595, 0, -0.0028449576, 0, 1, 0, 0.0028449576, 0, -0.99999595, -0.19446039, 0.5441667, -1.0467105)
+script = ExtResource("11_i23wu")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Level/Siren3"]
+light_color = Color(0.9124394, 0, 0.111834295, 1)
+light_volumetric_fog_energy = 50.0
+spot_range = 1.626
+spot_angle = 18.12
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Level/Siren3"]
+transform = Transform3D(-0.9940905, 0, -0.10855451, 0, 1, 0, 0.10855451, 0, -0.9940905, 0, 0, 0)
+light_color = Color(0.3825918, 0.40537146, 0.94951814, 1)
+light_volumetric_fog_energy = 50.0
+spot_range = 1.626
+spot_angle = 18.12
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.42107, -6.2117e-08)
