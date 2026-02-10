@@ -12,43 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://b6y4i2f21gati" path="res://W0041E/BuildingModels/GLB format/building-sample-tower-c.glb" id="8_bohxn"]
 [ext_resource type="PackedScene" uid="uid://b7g5mt3s4kbpt" path="res://W0041E/BuildingModels/GLB format/building-sample-tower-d.glb" id="9_i23wu"]
 [ext_resource type="PackedScene" uid="uid://b5tjf1lkpm3be" path="res://W0041E/CharacterModels/GLB format/character-male-c.glb" id="11_bohxn"]
+[ext_resource type="PackedScene" uid="uid://cxy57utbdkw0j" path="res://Char.tscn" id="13_bohxn"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5lwcm"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ia4oc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xpm5r"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_idfya"]
-
-[sub_resource type="CSharpScript" id="CSharpScript_bohxn"]
-script/source = "using Godot;
-using System;
-
-
-public partial class InverseEnvScript : Node3D
-{
-    bool isSkinOn = true;
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        //this.Visible = isSkinOn;
-    }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-        if (Input.IsActionJustPressed(\"Switch\"))
-        {
-            isSkinOn = (isSkinOn) ? false : true;
-            this.Visible = isSkinOn;
-        }
-
-        GD.Print(isSkinOn);
-    }
-}
-"
 
 [sub_resource type="Environment" id="Environment_i23wu"]
 ambient_light_source = 2
@@ -59,6 +29,8 @@ glow_enabled = true
 adjustment_enabled = true
 adjustment_brightness = 0.77
 adjustment_saturation = 0.65
+
+[sub_resource type="SphereMesh" id="SphereMesh_idfya"]
 
 [node name="Lab31" type="Node3D"]
 
@@ -261,10 +233,10 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.4
 script = ExtResource("2_0f0sq")
 leftPaddle = NodePath("LeftPaddle")
 rightPaddle = NodePath("RightPaddle")
-ball = NodePath("../Ball")
+ball = NodePath("../BallRoot")
 tableSize = Vector2(3, 2)
-ballSpeed = 15.0
-paddleSpeed = 5.0
+ballSpeed = 1.0
+paddleSpeed = 3.0
 
 [node name="LeftPaddle" type="Node3D" parent="PaddleController"]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.5, -1.5, 0, 0)
@@ -318,10 +290,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999962, 0, 0)
 mesh = SubResource("BoxMesh_xpm5r")
 skeleton = NodePath("../..")
 
-[node name="Ball" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.100372, 0, 0, 0, 0.100372, 0, 0, 0, 0.100372, 0, 0, 0)
-mesh = SubResource("SphereMesh_idfya")
-script = SubResource("CSharpScript_bohxn")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i23wu")
+
+[node name="BallRoot" type="Node3D" parent="."]
+
+[node name="OriginalBall" type="Node3D" parent="BallRoot"]
+script = ExtResource("2_f4sew")
+
+[node name="Ball" type="MeshInstance3D" parent="BallRoot/OriginalBall"]
+transform = Transform3D(0.100372, 0, 0, 0, 0.100372, 0, 0, 0, 0.100372, 0, 0, 0)
+mesh = SubResource("SphereMesh_idfya")
+skeleton = NodePath("../../..")
+
+[node name="BallSkin" type="Node3D" parent="BallRoot"]
+script = ExtResource("4_85um5")
+
+[node name="WheelChairGuy" parent="BallRoot/BallSkin" instance=ExtResource("13_bohxn")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

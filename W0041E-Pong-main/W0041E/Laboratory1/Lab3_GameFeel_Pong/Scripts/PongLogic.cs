@@ -18,7 +18,7 @@ public partial class PongLogic : Node
     private Vector3 ballVelocity = Vector3.Zero;
 
     [Export]
-    private float ballSpeed = 5.0f; 
+    private float ballSpeed = 2.0f; 
 
     [Export]
     private float paddleSpeed = 10.0f; 

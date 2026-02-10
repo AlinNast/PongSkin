@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxy57utbdkw0j"]
+
+[ext_resource type="PackedScene" uid="uid://b3d2vuiepede5" path="res://W0041E/CharacterModels/GLB format/character-male-b.glb" id="1_20esp"]
+[ext_resource type="PackedScene" uid="uid://dmlj57lyg7rh5" path="res://W0041E/CharacterModels/GLB format/wheelchair.glb" id="2_8q27n"]
+
+[node name="character-male-b2" instance=ExtResource("1_20esp")]
+
+[node name="character-male-b" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24843296, 0)
+
+[node name="Skeleton3D" parent="character-male-b" index="0"]
+bones/0/position = Vector3(0, -0.15, 0)
+bones/1/position = Vector3(0.083570965, 0.137, 0.059999995)
+bones/1/rotation = Quaternion(-0.7010574, 0.09229598, -0.09229598, 0.7010574)
+bones/2/position = Vector3(-0.08357096, 0.137, 0.059999995)
+bones/2/rotation = Quaternion(-0.7010574, -0.09229598, 0.09229598, 0.7010574)
+bones/4/rotation = Quaternion(0, 0, -0.25881907, 0.96592593)
+bones/5/rotation = Quaternion(0, 0, 0.25881907, 0.96592593)
+
+[node name="wheelchair2" parent="." index="2" instance=ExtResource("2_8q27n")]
