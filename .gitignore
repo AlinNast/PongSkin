@@ -18,4 +18,3 @@ mono_crash.*.json
 *.db
 *.bin
 /W0041E-Pong-main/.vs
-*.glb
