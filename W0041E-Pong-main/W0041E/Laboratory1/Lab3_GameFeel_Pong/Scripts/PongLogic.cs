@@ -26,6 +26,9 @@ public partial class PongLogic : Node
     [Export]
     public float paddleLerpSpeed = 20;
 
+    [Export]
+    public Node3D[] characters;
+
     private Random random = new Random();
 
     public float leftStickMagnitude = 0;
@@ -131,7 +134,20 @@ private void CheckPaddleCollision()
 
     if (Mathf.Abs(ball.GlobalPosition.X - targetPaddle.GlobalPosition.X) < targetPaddle.Scale.X / 2.0f)
     {
-        if (ball.GlobalPosition.Z >= paddleMinZ && ball.GlobalPosition.Z <= paddleMaxZ)
+            //GD.Print("Ball X: " + ball.GlobalPosition.X + " Paddle X: " + targetPaddle.GlobalPosition.X);
+            if (ballVelocity.X < 0) // Left side
+            { 
+                for (int i = 0; i < 4; i++) {
+                    characters[i].GetNode<AnimationPlayer>("AnimationPlayer").Play("attack-kick-left");
+                }
+            }
+            else { 
+                for (int i = 4; i < 8; i++) {
+                    characters[i].GetNode<AnimationPlayer>("AnimationPlayer").Play("attack-kick-right");
+                }
+            }// Right side
+
+            if (ball.GlobalPosition.Z >= paddleMinZ && ball.GlobalPosition.Z <= paddleMaxZ)
         {
             ballVelocity.X *= -1;
             float distanceFromCenter = ball.GlobalPosition.Z - paddleCenterZ;

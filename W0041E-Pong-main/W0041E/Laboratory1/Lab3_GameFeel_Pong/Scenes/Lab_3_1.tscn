@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bxsjqwurlq4a8"]
+[gd_scene load_steps=21 format=3 uid="uid://bxsjqwurlq4a8"]
 
 [ext_resource type="Material" uid="uid://c3b0ilgfnsvyi" path="res://shared/materials/Mat_Black.tres" id="1_y0gck"]
 [ext_resource type="Script" uid="uid://vspf4tlaj8t6" path="res://W0041E/Laboratory1/Lab3_GameFeel_Pong/Scripts/PongLogic.cs" id="2_0f0sq"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b5tjf1lkpm3be" path="res://W0041E/CharacterModels/GLB format/character-male-c.glb" id="11_bohxn"]
 [ext_resource type="Script" uid="uid://ruv1gixd517i" path="res://W0041E/Laboratory1/Lab3_GameFeel_Pong/Scripts/Siren.cs" id="11_i23wu"]
 [ext_resource type="PackedScene" uid="uid://cxy57utbdkw0j" path="res://Char.tscn" id="13_bohxn"]
+[ext_resource type="Script" uid="uid://31mv1xaciee3" path="res://ChairGuy.cs" id="15_3wcaf"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5lwcm"]
 
@@ -259,7 +260,7 @@ spot_range = 1.626
 spot_angle = 18.12
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Level/Siren2"]
-transform = Transform3D(-0.9940905, 0, -0.10855451, 0, 1, 0, 0.10855451, 0, -0.9940905, 0, 0, 0)
+transform = Transform3D(-0.9940905, 0, -0.10855451, 0, 1, 0, 0.10855451, 0, -0.9940905, 0, 0.11937663, 0)
 light_color = Color(0.3825918, 0.40537146, 0.94951814, 1)
 light_volumetric_fog_energy = 50.0
 spot_range = 1.626
@@ -285,7 +286,7 @@ spot_angle = 18.12
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.42107, -6.2117e-08)
 
-[node name="PaddleController" type="Node3D" parent="." node_paths=PackedStringArray("leftPaddle", "rightPaddle", "ball")]
+[node name="PaddleController" type="Node3D" parent="." node_paths=PackedStringArray("leftPaddle", "rightPaddle", "ball", "characters")]
 script = ExtResource("2_0f0sq")
 leftPaddle = NodePath("LeftPaddle")
 rightPaddle = NodePath("RightPaddle")
@@ -293,6 +294,7 @@ ball = NodePath("../BallRoot")
 tableSize = Vector2(3, 2)
 ballSpeed = 1.0
 paddleSpeed = 3.0
+characters = [NodePath("LeftPaddle/SkinPaddleMesh/character-male-c7"), NodePath("LeftPaddle/SkinPaddleMesh/character-male-c8"), NodePath("LeftPaddle/SkinPaddleMesh/character-male-c9"), NodePath("LeftPaddle/SkinPaddleMesh/character-male-c10"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c3"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c4"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c5"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c6")]
 
 [node name="LeftPaddle" type="Node3D" parent="PaddleController"]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.5, -1.5, 0, 0)
@@ -364,3 +366,4 @@ script = ExtResource("4_85um5")
 
 [node name="WheelChairGuy" parent="BallRoot/BallSkin" instance=ExtResource("13_bohxn")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+script = ExtResource("15_3wcaf")
