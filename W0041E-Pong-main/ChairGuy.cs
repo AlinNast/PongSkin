@@ -5,29 +5,27 @@ public partial class ChairGuy : Node3D
 {
     private Vector3 _lastPosition;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         _lastPosition = GlobalPosition;
 
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
         Vector3 velocity = _lastPosition - GlobalPosition;
         if (velocity.LengthSquared() > 0.00001f)
         { 
-            GD.Print("Velocity: " + velocity);
+            //GD.Print("Velocity: " + velocity);
             Vector3 direction = velocity.Normalized();
 
-            // 1. Get the current scale before we change anything
+            // Get the current scale before we change anything
             Vector3 currentScale = GlobalBasis.Scale;
 
-            // 2. Create the new rotation basis
+            // Create the new rotation basis
             Basis newBasis = Basis.LookingAt(direction, Vector3.Up);
 
-            // 3. Re-apply the scale to that new basis
+            // Re-apply the scale to that new basis
             // This multiplies the rotation vectors by your original scale
             GlobalBasis = newBasis.Scaled(currentScale);
         }

@@ -277,7 +277,7 @@ spot_range = 1.626
 spot_angle = 18.12
 
 [node name="Siren3" type="Node3D" parent="Level"]
-transform = Transform3D(-0.99999595, 0, -0.0028449576, 0, 1, 0, 0.0028449576, 0, -0.99999595, -0.19446039, 0.5441667, -1.0467105)
+transform = Transform3D(-0.8071458, 0, -0.5903521, 0, 1, 0, 0.5903521, 0, -0.8071458, -0.19446039, 0.5441667, -1.0467105)
 script = ExtResource("11_i23wu")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Level/Siren3"]

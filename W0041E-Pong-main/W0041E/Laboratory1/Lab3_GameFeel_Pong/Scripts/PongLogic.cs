@@ -67,6 +67,8 @@ public partial class PongLogic : Node
         BallMovement((float)delta);
         CheckPaddleCollision();
         CheckForScore();
+
+        // Toggle skin visibility does affect the sounds and camera shake
         if (Input.IsActionJustPressed("Switch"))
         {
             isSkinOn = (isSkinOn) ? false : true;
@@ -146,9 +148,9 @@ public partial class PongLogic : Node
         }
     }
 
- // Check paddle collision with the ball
+    // Check paddle collision with the ball
     private void CheckPaddleCollision()
-{
+    {
     Node3D targetPaddle = ballVelocity.X < 0 ? leftPaddle : rightPaddle;
     float paddleHalfSizeZ = targetPaddle.Scale.Z / 2.0f;
     float paddleCenterZ = targetPaddle.GlobalPosition.Z;
@@ -158,6 +160,7 @@ public partial class PongLogic : Node
     if (Mathf.Abs(ball.GlobalPosition.X - targetPaddle.GlobalPosition.X) < targetPaddle.Scale.X / 2.0f)
     {
             //GD.Print("Ball X: " + ball.GlobalPosition.X + " Paddle X: " + targetPaddle.GlobalPosition.X);
+            // Animate the paddle characters
             if (ballVelocity.X < 0) // Left side
             { 
                 for (int i = 0; i < 4; i++) {
@@ -170,13 +173,14 @@ public partial class PongLogic : Node
                 }
             }// Right side
 
+            // Play hit sound and apply camera shake only if the skin is on
             if (isSkinOn && hitSound != null)
             {
                 ApplyCameraShake(intensity: 0.15f, duration: 0.1f);
                 hitSound.Play();
             }
 
-            if (ball.GlobalPosition.Z >= paddleMinZ && ball.GlobalPosition.Z <= paddleMaxZ)
+        if (ball.GlobalPosition.Z >= paddleMinZ && ball.GlobalPosition.Z <= paddleMaxZ)
         {
             ballVelocity.X *= -1;
             float distanceFromCenter = ball.GlobalPosition.Z - paddleCenterZ;
@@ -218,22 +222,22 @@ public partial class PongLogic : Node
     }
 
 
+    // Apply camera shake effect when the ball hits a paddle, with intensity and duration parameters
     public void ApplyCameraShake(float intensity = 0.2f, float duration = 0.1f)
     {
         if (mainCamera == null) return;
 
-        // 1. Create a Tween (a lightweight animator)
+        // a lightweight animator
         Tween shakeTween = CreateTween();
 
-        // 2. Move the camera slightly in a random direction
+        // get a random direction
         Vector3 randomDirection = new Vector3(
             (float)GD.RandRange(-1, 1),
             (float)GD.RandRange(-1, 1),
             0
         ).Normalized() * intensity;
 
-        // 3. Chain two animations together:
-        // Move to the offset position quickly...
+        // apply the shake in that direction for the first half of the duration...
         shakeTween.TweenProperty(mainCamera, "h_offset", randomDirection.X, duration / 2);
         shakeTween.Parallel().TweenProperty(mainCamera, "v_offset", randomDirection.Y, duration / 2);
 
