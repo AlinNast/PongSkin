@@ -3,6 +3,8 @@ using System;
 
 public partial class PongLogic : Node
 {
+    bool isSkinOn = true;
+
     [Export]
     public Node3D leftPaddle;
 
@@ -29,6 +31,18 @@ public partial class PongLogic : Node
     [Export]
     public Node3D[] characters;
 
+    [Export]
+    AudioStreamPlayer hitSound;
+
+    [Export]
+    AudioStreamPlayer startSound;
+
+    [Export]
+    AudioStreamPlayer BgSound;
+
+    [Export]
+    Camera3D mainCamera;
+
     private Random random = new Random();
 
     public float leftStickMagnitude = 0;
@@ -53,6 +67,10 @@ public partial class PongLogic : Node
         BallMovement((float)delta);
         CheckPaddleCollision();
         CheckForScore();
+        if (Input.IsActionJustPressed("Switch"))
+        {
+            isSkinOn = (isSkinOn) ? false : true;
+        }
     }
 
     // Ball movement with speed adjustments
@@ -86,6 +104,11 @@ public partial class PongLogic : Node
     // Initialize match and set ball starting velocity
     public void InitMatch()
     {
+        if (isSkinOn && startSound != null)
+        {
+            startSound.Play();
+        }
+
         ball.GlobalPosition = Vector3.Zero;
         float angle = Mathf.DegToRad(random.Next(-45, 45));
         int horizontalDirection = random.Next(0, 2) == 0 ? 1 : -1;
@@ -124,7 +147,7 @@ public partial class PongLogic : Node
     }
 
  // Check paddle collision with the ball
-private void CheckPaddleCollision()
+    private void CheckPaddleCollision()
 {
     Node3D targetPaddle = ballVelocity.X < 0 ? leftPaddle : rightPaddle;
     float paddleHalfSizeZ = targetPaddle.Scale.Z / 2.0f;
@@ -146,6 +169,12 @@ private void CheckPaddleCollision()
                     characters[i].GetNode<AnimationPlayer>("AnimationPlayer").Play("attack-kick-right");
                 }
             }// Right side
+
+            if (isSkinOn && hitSound != null)
+            {
+                ApplyCameraShake(intensity: 0.15f, duration: 0.1f);
+                hitSound.Play();
+            }
 
             if (ball.GlobalPosition.Z >= paddleMinZ && ball.GlobalPosition.Z <= paddleMaxZ)
         {
@@ -188,4 +217,29 @@ private void CheckPaddleCollision()
         }
     }
 
+
+    public void ApplyCameraShake(float intensity = 0.2f, float duration = 0.1f)
+    {
+        if (mainCamera == null) return;
+
+        // 1. Create a Tween (a lightweight animator)
+        Tween shakeTween = CreateTween();
+
+        // 2. Move the camera slightly in a random direction
+        Vector3 randomDirection = new Vector3(
+            (float)GD.RandRange(-1, 1),
+            (float)GD.RandRange(-1, 1),
+            0
+        ).Normalized() * intensity;
+
+        // 3. Chain two animations together:
+        // Move to the offset position quickly...
+        shakeTween.TweenProperty(mainCamera, "h_offset", randomDirection.X, duration / 2);
+        shakeTween.Parallel().TweenProperty(mainCamera, "v_offset", randomDirection.Y, duration / 2);
+
+        // ...then move back to zero just as fast.
+        shakeTween.SetTrans(Tween.TransitionType.Bounce); // Adds a little "springiness"
+        shakeTween.TweenProperty(mainCamera, "h_offset", 0, duration / 2);
+        shakeTween.Parallel().TweenProperty(mainCamera, "v_offset", 0, duration / 2);
+    }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bxsjqwurlq4a8"]
+[gd_scene load_steps=25 format=3 uid="uid://bxsjqwurlq4a8"]
 
 [ext_resource type="Material" uid="uid://c3b0ilgfnsvyi" path="res://shared/materials/Mat_Black.tres" id="1_y0gck"]
 [ext_resource type="Script" uid="uid://vspf4tlaj8t6" path="res://W0041E/Laboratory1/Lab3_GameFeel_Pong/Scripts/PongLogic.cs" id="2_0f0sq"]
@@ -13,8 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://b7g5mt3s4kbpt" path="res://W0041E/BuildingModels/GLB format/building-sample-tower-d.glb" id="9_i23wu"]
 [ext_resource type="PackedScene" uid="uid://b5tjf1lkpm3be" path="res://W0041E/CharacterModels/GLB format/character-male-c.glb" id="11_bohxn"]
 [ext_resource type="Script" uid="uid://ruv1gixd517i" path="res://W0041E/Laboratory1/Lab3_GameFeel_Pong/Scripts/Siren.cs" id="11_i23wu"]
+[ext_resource type="AudioStream" uid="uid://couyqxevgb2nc" path="res://shared/SFX/573378__johnloser__cyber-punch-03.wav" id="12_t374w"]
+[ext_resource type="AudioStream" uid="uid://3srx5hwg238k" path="res://shared/SFX/73294__noisecollector__police_chopper3.mp3" id="13_42bqh"]
 [ext_resource type="PackedScene" uid="uid://cxy57utbdkw0j" path="res://Char.tscn" id="13_bohxn"]
+[ext_resource type="AudioStream" uid="uid://c3p0pypnyvoh0" path="res://shared/SFX/70938__guitarguy1985__police2.wav" id="14_f0pk6"]
 [ext_resource type="Script" uid="uid://31mv1xaciee3" path="res://ChairGuy.cs" id="15_3wcaf"]
+[ext_resource type="Script" uid="uid://cyoxd6ln00e5j" path="res://W0041E/Laboratory1/Lab3_GameFeel_Pong/Scripts/HelicopterSpotlight.cs" id="15_f0pk6"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5lwcm"]
 
@@ -23,13 +27,19 @@
 [sub_resource type="BoxMesh" id="BoxMesh_xpm5r"]
 
 [sub_resource type="Environment" id="Environment_i23wu"]
+background_color = Color(0.9445127, 0.7597751, 0.77549595, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.60148513, 0.1464198, 0.08106033, 1)
+ambient_light_color = Color(0.8966604, 0.26438227, 0.1753827, 1)
 ambient_light_energy = 0.42
 tonemap_exposure = 0.89
-glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_sun_scatter = 0.14
+fog_density = 1.0
+fog_sky_affect = 0.635
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.4241
+volumetric_fog_albedo = Color(0.92941177, 0.7764706, 0.8392157, 1)
 volumetric_fog_length = 196.61
 adjustment_enabled = true
 adjustment_brightness = 0.77
@@ -125,112 +135,112 @@ skeleton = NodePath("../..")
 script = ExtResource("4_85um5")
 
 [node name="building-sample-tower-a2" parent="Level/LevelSkin" instance=ExtResource("3_yvltx")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.010843873, 0, -1.0392036)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.010843873, 0, -1.1080796)
 
 [node name="building-sample-tower-a4" parent="Level/LevelSkin" instance=ExtResource("3_yvltx")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.21339157, 0, -1.0365332)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.21339157, 0, -1.1054091)
 
 [node name="building-sample-house-a2" parent="Level/LevelSkin" instance=ExtResource("4_dr5c1")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.38808393, 1.1920929e-07, -1.1434362)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.38808393, 1.1920929e-07, -1.2123121)
 
 [node name="building-sample-house-b2" parent="Level/LevelSkin" instance=ExtResource("5_w5x86")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.9886615, -5.9604645e-08, -1.1164075)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.9886615, -5.9604645e-08, -1.1852834)
 
 [node name="building-sample-house-b3" parent="Level/LevelSkin" instance=ExtResource("5_w5x86")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.1890435, -5.9604645e-08, -1.1146494)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.1890435, -5.9604645e-08, -1.1835253)
 
 [node name="building-sample-house-c2" parent="Level/LevelSkin" instance=ExtResource("6_20k3v")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.69001895, 2.3841858e-07, -1.1217251)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.69001895, 2.3841858e-07, -1.190601)
 
 [node name="building-sample-tower-a3" parent="Level/LevelSkin" instance=ExtResource("3_yvltx")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.18986666, 1.1920929e-07, -1.0429705)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.18986666, 1.1920929e-07, -1.1118464)
 
 [node name="building-sample-tower-b2" parent="Level/LevelSkin" instance=ExtResource("7_f4sew")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.3895631, 0, -1.0345765)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.3895631, 0, -1.1034524)
 
 [node name="building-sample-tower-b3" parent="Level/LevelSkin" instance=ExtResource("7_f4sew")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.80904645, 0, -1.0383273)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.80904645, 0, -1.1072032)
 
 [node name="building-sample-tower-c2" parent="Level/LevelSkin" instance=ExtResource("8_bohxn")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.41290173, -1.1920929e-07, -1.0392036)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.41290173, -1.1920929e-07, -1.1080796)
 
 [node name="building-sample-tower-c3" parent="Level/LevelSkin" instance=ExtResource("8_bohxn")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.6112795, -1.1920929e-07, -1.0390196)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.6112795, -1.1920929e-07, -1.1078955)
 
 [node name="building-sample-tower-c4" parent="Level/LevelSkin" instance=ExtResource("8_bohxn")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.0070666, -1.1920929e-07, -1.0387962)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.0070666, -1.1920929e-07, -1.1076721)
 
 [node name="building-sample-tower-d2" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.2072003, 0, -1.038596)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.2072003, 0, -1.107472)
 
 [node name="building-sample-tower-d5" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.406079, 0, -1.0394878)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.406079, 0, -1.1083637)
 
 [node name="building-sample-tower-d6" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.6041591, 0, -1.039071)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.6041591, 0, -1.1079469)
 
 [node name="building-sample-tower-d7" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.8053489, 0, -1.0409256)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.8053489, 0, -1.1098015)
 
 [node name="building-sample-tower-d3" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.5885313, 0, -1.0349545)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.5885313, 0, -1.1038305)
 
 [node name="building-sample-tower-d4" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.7870451, 0, -1.0351545)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.7870451, 0, -1.1040304)
 
 [node name="building-sample-tower-a5" parent="Level/LevelSkin" instance=ExtResource("3_yvltx")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 0.049260486, 0, 1.0465117)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 0.049260486, 0, 1.1075698)
 
 [node name="building-sample-tower-a6" parent="Level/LevelSkin" instance=ExtResource("3_yvltx")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.15328598, 0, 1.0437493)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.15328598, 0, 1.1048075)
 
 [node name="building-sample-house-a3" parent="Level/LevelSkin" instance=ExtResource("4_dr5c1")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 0.44814095, 1.1920929e-07, 1.1509253)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 0.44814095, 1.1920929e-07, 1.2119834)
 
 [node name="building-sample-house-b4" parent="Level/LevelSkin" instance=ExtResource("5_w5x86")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.0487307, -5.9604645e-08, 1.1241691)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.0487307, -5.9604645e-08, 1.1852273)
 
 [node name="building-sample-house-b5" parent="Level/LevelSkin" instance=ExtResource("5_w5x86")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.2491136, -5.9604645e-08, 1.1225021)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.2491136, -5.9604645e-08, 1.1835603)
 
 [node name="building-sample-house-c3" parent="Level/LevelSkin" instance=ExtResource("6_20k3v")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 0.7500858, 2.3841858e-07, 1.1293511)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 0.7500858, 2.3841858e-07, 1.1904093)
 
 [node name="building-sample-tower-a7" parent="Level/LevelSkin" instance=ExtResource("3_yvltx")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 0.24996929, 1.1920929e-07, 1.0503697)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 0.24996929, 1.1920929e-07, 1.1114279)
 
 [node name="building-sample-tower-b4" parent="Level/LevelSkin" instance=ExtResource("7_f4sew")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.4496695, 0, 1.0425202)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.4496695, 0, 1.1035783)
 
 [node name="building-sample-tower-b5" parent="Level/LevelSkin" instance=ExtResource("7_f4sew")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.7489416, 0, 1.0452731)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.7489416, 0, 1.1063312)
 
 [node name="building-sample-tower-c5" parent="Level/LevelSkin" instance=ExtResource("8_bohxn")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.35279733, -1.1920929e-07, 1.0463293)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.35279733, -1.1920929e-07, 1.1073874)
 
 [node name="building-sample-tower-c6" parent="Level/LevelSkin" instance=ExtResource("8_bohxn")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.551175, -1.1920929e-07, 1.0460551)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.551175, -1.1920929e-07, 1.1071132)
 
 [node name="building-sample-tower-c7" parent="Level/LevelSkin" instance=ExtResource("8_bohxn")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.94696194, -1.1920929e-07, 1.045652)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -0.94696194, -1.1920929e-07, 1.1067102)
 
 [node name="building-sample-tower-d8" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -1.1470954, 0, 1.045361)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -1.1470954, 0, 1.1064192)
 
 [node name="building-sample-tower-d9" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -1.3459747, 0, 1.0461626)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -1.3459747, 0, 1.1072208)
 
 [node name="building-sample-tower-d10" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -1.5440544, 0, 1.0456558)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -1.5440544, 0, 1.106714)
 
 [node name="building-sample-tower-d11" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -1.745245, 0, 1.0474192)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, -1.745245, 0, 1.1084774)
 
 [node name="building-sample-tower-d12" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.6486373, 0, 1.0429885)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.6486373, 0, 1.1040467)
 
 [node name="building-sample-tower-d13" parent="Level/LevelSkin" instance=ExtResource("9_i23wu")]
-transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.8471512, 0, 1.0432785)
+transform = Transform3D(-0.19999997, 0, 9.077231e-05, 0, 0.2, 0, -9.077231e-05, 0, -0.19999997, 1.8471512, 0, 1.1043366)
 
 [node name="Siren" type="Node3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8230726, 0.19863927, 0.656141)
@@ -283,10 +293,32 @@ light_volumetric_fog_energy = 50.0
 spot_range = 1.626
 spot_angle = 18.12
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.42107, -6.2117e-08)
+[node name="HitSound" type="AudioStreamPlayer" parent="Level"]
+stream = ExtResource("12_t374w")
 
-[node name="PaddleController" type="Node3D" parent="." node_paths=PackedStringArray("leftPaddle", "rightPaddle", "ball", "characters")]
+[node name="HelicoSound" type="AudioStreamPlayer" parent="Level"]
+stream = ExtResource("13_42bqh")
+autoplay = true
+parameters/looping = false
+
+[node name="SirenSound" type="AudioStreamPlayer" parent="Level"]
+stream = ExtResource("14_f0pk6")
+
+[node name="HelicoSpotLight" type="SpotLight3D" parent="Level" node_paths=PackedStringArray("Target")]
+transform = Transform3D(1, 0, 0, 0, 0.12625097, 0.9919984, 0, -0.9919984, 0.12625097, -1.091577, 2.2371023, 0.63639843)
+light_energy = 16.0
+light_indirect_energy = 4.629
+light_volumetric_fog_energy = 2.485
+light_size = 0.742
+spot_range = 6.265
+spot_angle = 6.55
+script = ExtResource("15_f0pk6")
+Target = NodePath("../../BallRoot")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.4050571, -6.2117e-08)
+
+[node name="PaddleController" type="Node3D" parent="." node_paths=PackedStringArray("leftPaddle", "rightPaddle", "ball", "characters", "hitSound", "startSound", "BgSound", "mainCamera")]
 script = ExtResource("2_0f0sq")
 leftPaddle = NodePath("LeftPaddle")
 rightPaddle = NodePath("RightPaddle")
@@ -295,6 +327,10 @@ tableSize = Vector2(3, 2)
 ballSpeed = 1.0
 paddleSpeed = 3.0
 characters = [NodePath("LeftPaddle/SkinPaddleMesh/character-male-c7"), NodePath("LeftPaddle/SkinPaddleMesh/character-male-c8"), NodePath("LeftPaddle/SkinPaddleMesh/character-male-c9"), NodePath("LeftPaddle/SkinPaddleMesh/character-male-c10"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c3"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c4"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c5"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c6")]
+hitSound = NodePath("../Level/HitSound")
+startSound = NodePath("../Level/SirenSound")
+BgSound = NodePath("../Level/HelicoSound")
+mainCamera = NodePath("../Camera3D")
 
 [node name="LeftPaddle" type="Node3D" parent="PaddleController"]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.5, -1.5, 0, 0)
