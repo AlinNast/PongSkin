@@ -318,7 +318,7 @@ Target = NodePath("../../BallRoot")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.4050571, -6.2117e-08)
 
-[node name="PaddleController" type="Node3D" parent="." node_paths=PackedStringArray("leftPaddle", "rightPaddle", "ball", "characters", "hitSound", "startSound", "BgSound", "mainCamera")]
+[node name="PaddleController" type="Node3D" parent="." node_paths=PackedStringArray("leftPaddle", "rightPaddle", "ball", "characters")]
 script = ExtResource("2_0f0sq")
 leftPaddle = NodePath("LeftPaddle")
 rightPaddle = NodePath("RightPaddle")
@@ -326,11 +326,7 @@ ball = NodePath("../BallRoot")
 tableSize = Vector2(3, 2)
 ballSpeed = 1.0
 paddleSpeed = 3.0
-characters = [NodePath("LeftPaddle/SkinPaddleMesh/character-male-c7"), NodePath("LeftPaddle/SkinPaddleMesh/character-male-c8"), NodePath("LeftPaddle/SkinPaddleMesh/character-male-c9"), NodePath("LeftPaddle/SkinPaddleMesh/character-male-c10"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c3"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c4"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c5"), NodePath("RightPaddle/SkinPaddleMesh/character-male-c6")]
-hitSound = NodePath("../Level/HitSound")
-startSound = NodePath("../Level/SirenSound")
-BgSound = NodePath("../Level/HelicoSound")
-mainCamera = NodePath("../Camera3D")
+characters = []
 
 [node name="LeftPaddle" type="Node3D" parent="PaddleController"]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.5, -1.5, 0, 0)
@@ -403,3 +399,10 @@ script = ExtResource("4_85um5")
 [node name="WheelChairGuy" parent="BallRoot/BallSkin" instance=ExtResource("13_bohxn")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 script = ExtResource("15_3wcaf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Switch the polish layer with button A (or X in PS)"
