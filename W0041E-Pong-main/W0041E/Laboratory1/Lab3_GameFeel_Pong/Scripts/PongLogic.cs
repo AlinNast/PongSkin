@@ -6,6 +6,9 @@ public partial class PongLogic : Node
     bool isSkinOn = true;
 
     [Export]
+    public ChairGuy _chairGuy;
+
+    [Export]
     public Node3D leftPaddle;
 
     [Export]
@@ -176,6 +179,7 @@ public partial class PongLogic : Node
             // Play hit sound and apply camera shake only if the skin is on
             if (isSkinOn && hitSound != null)
             {
+                _chairGuy.OnCollisionImpact();
                 ApplyCameraShake(intensity: 0.15f, duration: 0.1f);
                 hitSound.Play();
             }
