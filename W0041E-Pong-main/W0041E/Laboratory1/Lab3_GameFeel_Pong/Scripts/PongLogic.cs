@@ -6,6 +6,9 @@ public partial class PongLogic : Node
     bool isSkinOn = true;
 
     [Export]
+    public MainCamera _mainCamera;
+
+    [Export]
     public ChairGuy _chairGuy;
 
     [Export]
@@ -111,6 +114,8 @@ public partial class PongLogic : Node
     {
         if (isSkinOn && startSound != null)
         {
+            _mainCamera.PlayRespawnLerp();
+
             startSound.Play();
         }
 
